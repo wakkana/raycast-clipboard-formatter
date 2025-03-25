@@ -1,4 +1,5 @@
 import { Action, ActionPanel, Clipboard, closeMainWindow, List, showToast, Toast } from "@raycast/api";
+import { showFailureToast } from "@raycast/utils";
 import { XMLBuilder, XMLParser } from "fast-xml-parser";
 
 export default function Command() {
@@ -30,7 +31,10 @@ async function formatClipboard(format: "json" | "xml") {
   try {
     const text = await Clipboard.readText();
     if (!text) {
-      await showToast({ style: Toast.Style.Failure, title: "Clipboard is empty" });
+      await showToast({
+        style: Toast.Style.Failure,
+        title: "Clipboard is empty",
+      });
       return;
     }
 
@@ -47,10 +51,13 @@ async function formatClipboard(format: "json" | "xml") {
     }
 
     await Clipboard.copy(formattedText);
-    await showToast({ style: Toast.Style.Success, title: `${format.toUpperCase()} formatted successfully` });
+    await showToast({
+      style: Toast.Style.Success,
+      title: `${format.toUpperCase()} formatted successfully`,
+    });
 
     await closeMainWindow();
   } catch (error) {
-    await showToast({ style: Toast.Style.Failure, title: "Formatting failed", message: String(error) });
+    await showFailureToast(error);
   }
 }
