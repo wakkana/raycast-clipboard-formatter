@@ -6,7 +6,7 @@ export default function Command() {
   return (
     <List>
       <List.Item
-        title="Format Json"
+        title="Format JSON"
         icon="📄"
         actions={
           <ActionPanel>
@@ -15,7 +15,7 @@ export default function Command() {
         }
       />
       <List.Item
-        title="Format Xml"
+        title="Format XML"
         icon="📄"
         actions={
           <ActionPanel>
